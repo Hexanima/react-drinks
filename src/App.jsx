@@ -1,0 +1,18 @@
+import { CategoriesProvider } from "./context/CategoriesProvider";
+import { DrinksProvider } from "./context/DrinksProvider";
+import MainLayout from "./layout";
+import AppRoutes from "./router";
+
+function App() {
+  return (
+    <MainLayout>
+      <DrinksProvider>
+        <CategoriesProvider>
+          <AppRoutes />
+        </CategoriesProvider>
+      </DrinksProvider>
+    </MainLayout>
+  );
+}
+
+export default App;
