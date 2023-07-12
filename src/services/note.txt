@@ -1,0 +1,12 @@
+Que hay q hacer?
+
+Carrito
+Boton en card para agregar bebida a carrito
+
+Vista donde haya carrito items:
+Boton eliminar carrito
+Contador cantidad carrito item en vista carrito
+Concretar compra (muestra resumen)
+
+Faltan datos:
+Precios

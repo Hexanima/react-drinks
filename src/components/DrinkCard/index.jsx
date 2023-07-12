@@ -1,9 +1,14 @@
-import { Col, Card, Button } from "react-bootstrap";
+import { Col, Card, Button, Row } from "react-bootstrap";
 import { useDrinks } from "../../hooks/useDrinks";
 import PropTypes from "prop-types";
+import { useCart } from "../../hooks/useCart";
 
 function DrinkCard({ drink }) {
   const { handleDrinkIdClick, handleModalClick } = useDrinks();
+  const { addToCart } = useCart();
+  function handleAddToCart(drink) {
+    addToCart(drink);
+  }
   return (
     <Col md={6} lg={3}>
       <Card className="mb-4">
@@ -15,17 +20,32 @@ function DrinkCard({ drink }) {
 
         <Card.Body>
           <Card.Title>{drink.strDrink}</Card.Title>
-
-          <Button
-            variant="warning"
-            className="w-100 text-uppercase mt-2"
-            onClick={() => {
-              handleModalClick();
-              handleDrinkIdClick(drink.idDrink);
-            }}
-          >
-            Ver Receta
-          </Button>
+          <Card.Subtitle style={{ marginBottom: 2 }}>
+            ${drink.price}
+          </Card.Subtitle>
+          <Row>
+            <Col className="w-50 p-3 mt-2">
+              <Button
+                variant="warning"
+                className="text-uppercase mt-2"
+                onClick={() => {
+                  handleModalClick();
+                  handleDrinkIdClick(drink.idDrink);
+                }}
+              >
+                Ver Receta
+              </Button>
+            </Col>
+            <Col className="w-50 p-3 mt-2">
+              <Button
+                variant="primary"
+                className="text-uppercase mt-2"
+                onClick={() => handleAddToCart(drink)}
+              >
+                Agregar al carrito
+              </Button>
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
     </Col>
@@ -37,6 +57,7 @@ DrinkCard.propTypes = {
     strDrinkThumb: PropTypes.string.isRequired,
     strDrink: PropTypes.string.isRequired,
     idDrink: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
   }).isRequired,
 };
 
