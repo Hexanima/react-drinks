@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 import PropTypes from "prop-types";
 import { actionTypes } from "../actions/cart.actions";
 import { cartReducer, cartInitialState } from "../reducers/cart.reducer";
@@ -7,6 +7,7 @@ const CartContext = createContext();
 
 function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, cartInitialState);
+  const [cartToggled, setCartToggled] = useState(false);
 
   function addToCart(drink) {
     dispatch({ type: actionTypes.ADD_TO_CART, payload: drink });
@@ -24,12 +25,17 @@ function CartProvider({ children }) {
     dispatch({ type: actionTypes.CLEAR_CART, payload: { idDrink: 0 } });
   }
 
+  function handleToggleCart() {
+    setCartToggled(!cartToggled);
+  }
+
   const cartValues = {
     cart: state,
     addToCart,
     removeOneFromCart,
     removeAllFromCart,
     clearCart,
+    handleToggleCart
   };
 
   return (

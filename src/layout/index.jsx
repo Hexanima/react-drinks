@@ -3,12 +3,15 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import styles from "./MainLayout.module.css";
 import PropTypes from "prop-types";
+import CartModal from "../components/CartModal";
+import useModal from "../hooks/useModal";
 
 function MainLayout({ children }) {
   return (
     <div className={styles.main}>
       <Header />
-      <Container className="mt-5">{children}</Container>
+      <Container className="mt-5 flex-grow-1">{children}</Container>
+      <CartModal/>
       <Footer />
     </div>
   );
