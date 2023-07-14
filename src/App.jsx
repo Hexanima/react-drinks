@@ -1,20 +1,23 @@
 import { CartProvider } from "./context/CartProvider";
 import { CategoriesProvider } from "./context/CategoriesProvider";
 import { DrinksProvider } from "./context/DrinksProvider";
+import { ModalProvider } from "./context/ModalProvider";
 import MainLayout from "./layout";
 import AppRoutes from "./router";
 
 function App() {
   return (
-    <MainLayout>
-      <DrinksProvider>
-        <CategoriesProvider>
-          <CartProvider>
-            <AppRoutes />
-          </CartProvider>
-        </CategoriesProvider>
-      </DrinksProvider>
-    </MainLayout>
+    <ModalProvider>
+      <CartProvider>
+        <DrinksProvider>
+          <CategoriesProvider>
+            <MainLayout>
+              <AppRoutes />
+            </MainLayout>
+          </CategoriesProvider>
+        </DrinksProvider>
+      </CartProvider>
+    </ModalProvider>
   );
 }
 

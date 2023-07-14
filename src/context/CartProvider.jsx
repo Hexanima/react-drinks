@@ -7,7 +7,6 @@ const CartContext = createContext();
 
 function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, cartInitialState);
-  const [cartToggled, setCartToggled] = useState(false);
 
   function addToCart(drink) {
     dispatch({ type: actionTypes.ADD_TO_CART, payload: drink });
@@ -25,17 +24,12 @@ function CartProvider({ children }) {
     dispatch({ type: actionTypes.CLEAR_CART, payload: { idDrink: 0 } });
   }
 
-  function handleToggleCart() {
-    setCartToggled(!cartToggled);
-  }
-
   const cartValues = {
     cart: state,
     addToCart,
     removeOneFromCart,
     removeAllFromCart,
-    clearCart,
-    handleToggleCart
+    clearCart
   };
 
   return (

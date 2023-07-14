@@ -5,7 +5,7 @@ export const cartInitialState = {
 };
 
 export function cartReducer(state, { payload, type }) {
-    const { idDrink} = payload;
+    const { idDrink } = payload;
 
     let drinkInCart = state.cartItems.find((item) => item.idDrink === idDrink);
 
