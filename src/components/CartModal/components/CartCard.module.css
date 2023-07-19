@@ -40,4 +40,5 @@
 
 .card .iconTrash {
   color: red;
+  cursor: pointer;
 }
