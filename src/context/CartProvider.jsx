@@ -1,12 +1,19 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import PropTypes from "prop-types";
 import { actionTypes } from "../actions/cart.actions";
 import { cartReducer, cartInitialState } from "../reducers/cart.reducer";
+import { getPriceList } from "../utils/card.utils";
 
 const CartContext = createContext();
 
 function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, cartInitialState);
+  const [orderTotal, setOrderTotal] = useState(0)
+
+  useEffect(() => {
+    const total = getPriceList(state.cartItems).reduce((sum, price) => sum + price, 0)
+    setOrderTotal(total)
+  }, [state]);
 
   function addToCart(drink) {
     dispatch({ type: actionTypes.ADD_TO_CART, payload: drink });
@@ -24,12 +31,18 @@ function CartProvider({ children }) {
     dispatch({ type: actionTypes.CLEAR_CART, payload: { idDrink: 0 } });
   }
 
+  function confirmPurchase() {
+    alert(JSON.stringify(state));
+  }
+
   const cartValues = {
     cart: state,
     addToCart,
     removeOneFromCart,
     removeAllFromCart,
-    clearCart
+    clearCart,
+    confirmPurchase,
+    orderTotal
   };
 
   return (

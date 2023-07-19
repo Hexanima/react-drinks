@@ -1,47 +1,20 @@
 import styles from "./CartModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import useModal from "../../hooks/useModal";
 import { useCart } from "../../hooks/useCart";
+import CartCard from "./components/CartCard";
 
 function CartModal() {
   const { isOpen, toggleModal } = useModal();
-  const {
-    cart,
-    addToCart,
-    removeOneFromCart,
-    removeAllFromCart,
-    clearCart,
-    handleToggleCart,
-  } = useCart();
+  const { cart, clearCart, confirmPurchase, orderTotal } = useCart();
 
   const cartList = cart.cartItems.map((cartItem) => (
-    <article className={styles.card} key={cartItem.idDrink}>
-      <img src={cartItem.strDrinkThumb} alt="" />
-      <span>{cartItem.strDrink.substring(0, 10)}</span>
-      <span>${cartItem.price * cartItem.quantity}</span>
-      <div className={styles.counter}>
-        <button
-          onClick={() => {
-            removeOneFromCart(cartItem.idDrink);
-          }}
-        >
-          -
-        </button>
-        <span>{cartItem.quantity}</span>
-        <button onClick={() => addToCart(cartItem)}>+</button>
-      </div>
-      <FontAwesomeIcon
-        icon={faTrash}
-        className={styles.iconTrash}
-        onClick={() => removeAllFromCart(cartItem.idDrink)}
-      />
-    </article>
+    <CartCard key={cartItem.idDrink} cartItem={cartItem} />
   ));
 
-  return (
-    isOpen && (
+  if (isOpen) {
+    return (
       <div className={styles.modalBg}>
         <div className={styles.modal}>
           <FontAwesomeIcon
@@ -59,13 +32,15 @@ function CartModal() {
               )}
             </div>
             <aside>
-              <p>Subtotal: XXXXX</p>
-              <p>Total: ${cart.cartItems.reduce((result, drink) => result + drink.price * drink.quantity, 0)}</p>
+              <p>Total: ${orderTotal}</p>
               <div className={styles.btnContainer}>
                 <button className={styles.clearCart} onClick={clearCart}>
                   Vaciar carrito
                 </button>
-                <button className={styles.confirmOrder}>
+                <button
+                  className={styles.confirmOrder}
+                  onClick={confirmPurchase}
+                >
                   Confirmar compra
                 </button>
               </div>
@@ -73,8 +48,8 @@ function CartModal() {
           </section>
         </div>
       </div>
-    )
-  );
+    );
+  }
 }
 
 export default CartModal;

@@ -31,6 +31,7 @@ export function cartReducer(state, { payload, type }) {
                     cartItems: [...state.cartItems, { ...payload, quantity: 1 }],
                 };
             }
+            
         case actionTypes.REMOVE_ONE_FROM_CART:
             if (drinkInCart.quantity > 1) {
                 let updatedCartItems = state.cartItems.map((drink) => {
@@ -52,6 +53,7 @@ export function cartReducer(state, { payload, type }) {
                     cartItems: updatedCartItems,
                 };
             }
+
         case actionTypes.REMOVE_ALL_FROM_CART:
             if (drinkInCart) {
                 let updatedCartItems = state.cartItems.filter(
