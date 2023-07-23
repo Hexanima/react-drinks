@@ -2,8 +2,20 @@
   background-color: #ec3a49;
   color: white;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5rem;
+  gap: 5rem;
 }
 .header h1 {
   font-family: "Outfit", sans-serif;
   font-weight: 900;
+}
+
+.header .headerButton {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
 }

@@ -1,24 +1,34 @@
 import styles from "./Header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCartShopping,
+  faArrowRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 import useModal from "../../hooks/useModal";
 import { useAuth } from "../../hooks/useAuth";
+import { Typography } from "@mui/material";
 
 function Header() {
   const { toggleModal } = useModal();
   const { currentUser, logout } = useAuth();
   return (
     <header className={`py-5 ${styles.header}`}>
-      <h1>Buscador de Bebidas</h1>
+      <h1>La boutique de las bebidas</h1>
       {currentUser && (
         <>
-          <p>{currentUser.name}</p>
-          <FontAwesomeIcon
-            icon={faCartShopping}
-            style={{ cursor: "pointer" }}
-            onClick={toggleModal}
-          />
-          <button onClick={logout}>Salir</button>
+          <div className={`${styles.headerButton}`}>
+            <span>{currentUser.name}</span>
+            <FontAwesomeIcon
+              icon={faCartShopping}
+              style={{ cursor: "pointer" }}
+              onClick={toggleModal}
+            />
+            <FontAwesomeIcon
+              icon={faArrowRightFromBracket}
+              style={{ cursor: "pointer" }}
+              onClick={logout}
+            />
+          </div>
         </>
       )}
     </header>

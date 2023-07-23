@@ -14,8 +14,8 @@ function AuthProvider({ children }) {
   useEffect(() => {
     if (storedToken) {
       const decodedToken = storedToken ? jwt_decode(storedToken) : null; // Si existe token, decodificar, sino nulo
-      console.log(decodedToken)
-      const {user} = decodedToken ? decodedToken : null; // Si se pudo decodificar, extraer payload, sino nulo
+      console.log(decodedToken);
+      const { user } = decodedToken ? decodedToken : null; // Si se pudo decodificar, extraer payload, sino nulo
 
       setCurrentUser(user);
 
@@ -33,10 +33,10 @@ function AuthProvider({ children }) {
           }, 1000);
           return;
         } else {
-          return Promise.reject(res.message);
+          return Promise.reject(res);
         }
       })
-      .catch((err) => alert(JSON.stringify(err)));
+      .catch((err) => alert(err));
   }
 
   function login(data) {
