@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCartShopping,
   faArrowRightFromBracket,
-} from "@fortawesome/free-regular-svg-icons";
+} from "@fortawesome/free-solid-svg-icons";
 import useModal from "../../hooks/useModal";
 import { useAuth } from "../../hooks/useAuth";
 import { Typography } from "@mui/material";

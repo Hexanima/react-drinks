@@ -1,6 +1,6 @@
 import styles from "./CartModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmarkCircle } from "@fortawesome/free-regular-svg-icons";
+import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import useModal from "../../hooks/useModal";
 import { useCart } from "../../hooks/useCart";
 import CartCard from "./components/CartCard";
