@@ -1,11 +1,10 @@
-import axios from "axios";
-
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const getRecipeService = async (drinkId) => {
     try {
         const url = `${apiUrl}/lookup.php?i=${drinkId}`
-        const { data } = await axios.get(url)
+        const res = await fetch(url)
+        const  data  = await res.json() // axios(url) hace lo mismo
         return data.drinks[0];
     } catch (error) {
         console.error(error);
@@ -16,7 +15,8 @@ const getRecipeService = async (drinkId) => {
 const filterDrinksService = async (name, category) => {
     try {
         const url = `${apiUrl}/filter.php?i=${name}&c=${category}`;
-        const { data } = await axios.get(url);
+        const res = await fetch(url)
+        const  data  = await res.json() // axios(url) hace lo mismo
         return data.drinks;
     } catch (error) {
         console.error(error);
